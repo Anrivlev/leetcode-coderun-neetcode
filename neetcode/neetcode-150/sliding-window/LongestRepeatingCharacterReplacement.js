@@ -20,14 +20,10 @@ class Solution {
       }
       while (right - left + 1 - maxFrequency - k > 0) {
         const frequency = frequencies.get(s[left]) ?? 0;
-        if (frequency === maxFrequency) maxFrequency--;
         frequencies.set(s[left], frequency - 1);
         left++;
       }
-      maxLength = Math.max(
-        Math.min(maxFrequency + k, right - left + 1),
-        maxLength,
-      );
+      maxLength = Math.max(right - left + 1, maxLength);
     }
     return maxLength;
   }
