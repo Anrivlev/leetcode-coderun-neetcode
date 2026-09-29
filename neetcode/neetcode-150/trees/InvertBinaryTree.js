@@ -32,11 +32,11 @@ class Solution {
    */
   invertTree(root) {
     if (root === null) return null;
-    const queue = [root];
-    while (queue.length > 0) {
-      const node = queue.pop();
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+    const stack = [root];
+    while (stack.length > 0) {
+      const node = stack.pop();
+      if (node.left) stack.push(node.left);
+      if (node.right) stack.push(node.right);
       const left = node.left;
       node.left = node.right;
       node.right = left;
