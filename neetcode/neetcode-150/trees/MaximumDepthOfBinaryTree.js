@@ -30,12 +30,12 @@ class Solution {
   maxDepth(root) {
     if (!root) return 0;
     let max = 0;
-    const queue = [{ node: root, depth: 1 }];
-    while (queue.length > 0) {
-      const { node, depth } = queue.pop();
+    const stack = [{ node: root, depth: 1 }];
+    while (stack.length > 0) {
+      const { node, depth } = stack.pop();
       if (depth > max) max = depth;
-      if (node.left) queue.push({ node: node.left, depth: depth + 1 });
-      if (node.right) queue.push({ node: node.right, depth: depth + 1 });
+      if (node.left) stack.push({ node: node.left, depth: depth + 1 });
+      if (node.right) stack.push({ node: node.right, depth: depth + 1 });
     }
     return max;
   }
