@@ -43,18 +43,18 @@ class Solution {
       second = a;
     }
 
-    const head = { val: first.val, next: null };
+    const head = first;
 
     let c1 = first.next;
     let c2 = second;
     let c3 = head;
     while (c1 && c2) {
       if (c1.val <= c2.val) {
-        c3.next = { val: c1.val, next: null };
+        c3.next = c1;
         c3 = c3.next;
         c1 = c1.next;
       } else {
-        c3.next = { val: c2.val, next: null };
+        c3.next = c2;
         c3 = c3.next;
         c2 = c2.next;
       }
@@ -109,18 +109,18 @@ class Solution {
       second = a;
     }
 
-    const head = { val: first.val, next: null };
+    const head = first;
 
     let c1 = first.next;
     let c2 = second;
     let c3 = head;
     while (c1 && c2) {
       if (c1.val <= c2.val) {
-        c3.next = { val: c1.val, next: null };
+        c3.next = c1;
         c3 = c3.next;
         c1 = c1.next;
       } else {
-        c3.next = { val: c2.val, next: null };
+        c3.next = c2;
         c3 = c3.next;
         c2 = c2.next;
       }
