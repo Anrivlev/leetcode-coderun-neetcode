@@ -20,20 +20,15 @@ class Solution {
         return false;
       }
       if (index === word.length - 1) return true;
-      if (i > 0) {
-        const isFound = backtrack(i - 1, j, index + 1);
-        if (isFound) return true;
-      }
-      if (j > 0) {
-        const isFound = backtrack(i, j - 1, index + 1);
-        if (isFound) return true;
-      }
-      if (i < board.length - 1) {
-        const isFound = backtrack(i + 1, j, index + 1);
-        if (isFound) return true;
-      }
-      if (j < board[i].length - 1) {
-        const isFound = backtrack(i, j + 1, index + 1);
+
+      const options = [];
+      if (i > 0) options.push([i - 1, j, index + 1]);
+      if (j > 0) options.push([i, j - 1, index + 1]);
+      if (i < board.length - 1) options.push([i + 1, j, index + 1]);
+      if (j < board[i].length - 1) options.push([i, j + 1, index + 1]);
+
+      for (const option of options) {
+        const isFound = backtrack(...option);
         if (isFound) return true;
       }
       visited[i][j] = false;
