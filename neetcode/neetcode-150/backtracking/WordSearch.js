@@ -13,13 +13,13 @@ class Solution {
 
     function backtrack(i, j, index) {
       if (visited[i][j]) return false;
-      visited[i][j] = true;
       const char = word[index];
       if (board[i][j] !== char) {
-        visited[i][j] = false;
         return false;
       }
       if (index === word.length - 1) return true;
+
+      visited[i][j] = true;
 
       const options = [];
       if (i > 0) options.push([i - 1, j, index + 1]);
