@@ -29,7 +29,7 @@ class Solution {
           if (sum === target) res.push(arr);
           else {
             const index = i + 1;
-            if (index < candidates.length) stack.push({ arr, sum, index });
+            if (index < candidatesUnique.length) stack.push({ arr, sum, index });
           }
         }
       }
