@@ -13,10 +13,7 @@ class Solution {
     function backtrack() {
       if (index === s.length) {
         if (currentString.length === 0) {
-          const copiedArray = currentArray.slice();
-          if (currentString.length > 0)
-            copiedArray.push(currentString.join(""));
-          res.push(copiedArray);
+          res.push(currentArray.slice());
         }
 
         return;
