@@ -19,7 +19,7 @@ class Solution {
 
     function backtrack(i) {
       if (i === n) {
-        answer.push(board.map((row) => row.slice().join("")));
+        answer.push(board.map((row) => row.join("")));
         return;
       }
       for (let j = 0; j < n; j++) {

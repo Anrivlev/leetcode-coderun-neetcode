@@ -23,7 +23,7 @@ class Solution {
 
     function backtrack() {
       if (index === digits.length) {
-        answer.push(curr.slice().join(""));
+        answer.push(curr.join(""));
         return;
       }
 
