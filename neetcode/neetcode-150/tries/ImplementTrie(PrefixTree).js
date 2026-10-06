@@ -1,6 +1,6 @@
 class PrefixTree {
   constructor() {
-    this.root = { children: new Map(), char: null, isWord: false };
+    this.root = { children: new Map(), char: null, isEndOfWord: false };
   }
 
   /**
@@ -13,12 +13,12 @@ class PrefixTree {
     for (const char of word) {
       let next = curr.children.get(char);
       if (!next) {
-        next = { children: new Map(), char, isWord: false };
+        next = { children: new Map(), char, isEndOfWord: false };
         curr.children.set(char, next);
       }
       curr = next;
     }
-    curr.isWord = true;
+    curr.isEndOfWord = true;
   }
 
   /**
@@ -32,7 +32,7 @@ class PrefixTree {
       curr = curr.children.get(char);
       if (!curr) return false;
     }
-    return curr.isWord;
+    return curr.isEndOfWord;
   }
 
   /**
