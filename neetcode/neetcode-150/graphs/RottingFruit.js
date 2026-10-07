@@ -41,7 +41,7 @@ class Solution {
       [0, 1],
     ];
 
-    while (head < queue.length) {
+    while (head < queue.length && freshFruitCount > 0) {
       const { i, j, time } = queue[head++];
       for (const direction of directions) {
         const next = {
