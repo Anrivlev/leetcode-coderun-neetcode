@@ -38,7 +38,7 @@ class Solution {
           nextJ < 0 ||
           nextI >= n ||
           nextJ >= m ||
-          grid[nextI][nextJ] < nextDistance
+          grid[nextI][nextJ] <= nextDistance
         )
           continue;
         grid[nextI][nextJ] = nextDistance;
