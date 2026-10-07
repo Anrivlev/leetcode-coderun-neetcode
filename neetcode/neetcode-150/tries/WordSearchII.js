@@ -9,7 +9,6 @@ class Solution {
       char: null,
       children: new Map(),
       isEndOfWord: false,
-      parent: null,
       isFound: false,
     };
     for (const word of words) {
@@ -21,7 +20,6 @@ class Solution {
             char,
             children: new Map(),
             isEndOfWord: false,
-            parent: curr,
             isFound: false,
           };
           curr.children.set(char, next);
@@ -46,6 +44,9 @@ class Solution {
     ];
 
     function backtrack(i, j, curr, word) {
+      word.push(curr.char);
+      visited[i][j] = true;
+
       if (curr.isEndOfWord && !curr.isFound) {
         curr.isFound = true;
         foundWords.push(word.join(""));
@@ -58,12 +59,11 @@ class Solution {
         const char = board[i2][j2];
         const next = curr.children.get(char);
         if (!next) continue;
-        word.push(char);
-        visited[i2][j2] = true;
         backtrack(i2, j2, next, word);
-        word.pop();
-        visited[i2][j2] = false;
       }
+
+      word.pop();
+      visited[i][j] = false;
     }
 
     for (let i = 0; i < n; i++) {
@@ -71,9 +71,7 @@ class Solution {
         const char = board[i][j];
         let curr = root.children.get(char);
         if (curr) {
-          visited[i][j] = true;
-          backtrack(i, j, curr, [char]);
-          visited[i][j] = false;
+          backtrack(i, j, curr, []);
         }
       }
     }
