@@ -10,30 +10,25 @@ class Solution {
       adjacencies[a].push(b);
     }
 
-    const STATUS = {
-      NOT_VISITED: 0,
-      VISITED: 1,
-      VISITED_AND_LEFT: 2,
+    const visited = new Array(numCourses).fill(false);
+
+    const dfs = (course) => {
+      if (visited[course]) return false;
+
+      if (adjacencies[course].length === 0) return true;
+
+      visited[course] = true;
+      for (const prerequisite of adjacencies[course]) {
+        if (!dfs(prerequisite)) return false;
+      }
+
+      visited[course] = false;
+      adjacencies[course] = [];
+      return true;
     };
 
-    const visited = new Array(numCourses).fill(STATUS.NOT_VISITED);
-
     for (let i = 0; i < numCourses; i++) {
-      const stack = [i];
-      while (stack.length > 0) {
-        const curr = stack.pop();
-
-        if (visited[curr] === STATUS.VISITED) return false;
-        visited[curr] = STATUS.VISITED;
-
-        const neighbours = adjacencies[curr];
-        if (neighbours.length === 0) {
-          visited[curr] = STATUS.VISITED_AND_LEFT;
-          continue;
-        }
-
-        const stack = [...neighbours];
-      }
+      if (!dfs(i)) return false;
     }
 
     return true;
