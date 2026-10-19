@@ -6,10 +6,10 @@ class Solution {
   findRedundantConnection(edges) {
     const n = edges.length + 1;
     const parents = new Array(n).fill(0).map((value, index) => index);
-    const ranks = new Array(n).fill(1);
+    const sizes = new Array(n).fill(1);
 
     const find = (i) => {
-      let p = parents[i];
+      let p = i;
       while (p !== parents[p]) {
         parents[p] = parents[parents[p]];
         p = parents[p];
@@ -23,12 +23,12 @@ class Solution {
 
       if (p1 === p2) return false;
 
-      if (ranks[p1] > ranks[p2]) {
+      if (sizes[p1] > sizes[p2]) {
         parents[p2] = p1;
-        ranks[p1] += ranks[p2];
+        sizes[p1] += sizes[p2];
       } else {
         parents[p1] = p2;
-        ranks[p2] += ranks[p1];
+        sizes[p2] += sizes[p1];
       }
 
       return true;
