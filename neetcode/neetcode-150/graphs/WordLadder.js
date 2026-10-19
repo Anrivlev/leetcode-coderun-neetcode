@@ -9,7 +9,13 @@ class Solution {
     // Проверка, что endWord есть в wordList
     if (wordList.every((word) => word !== endWord)) return 0;
 
-    const root = { children: new Map(), char: null, isWordEnd: false };
+    const root = {
+      children: new Map(),
+      char: null,
+      isWordEnd: false,
+      isVisited: false,
+      word: null,
+    };
 
     // Добавлям все слова в Trie
     for (const word of wordList) {
@@ -22,25 +28,24 @@ class Solution {
             char,
             isWordEnd: false,
             isVisited: false,
+            word: null,
           };
           curr.children.set(char, next);
         }
         curr = next;
       }
       curr.isWordEnd = true;
+      curr.word = word;
     }
 
     function getTail(word, index, node) {
-      let newWord = word.split("").slice(0, index - 1);
-      newWord.push(node.char);
       for (let i = index; i < word.length; i++) {
         node = node.children.get(word[i]);
         if (!node) return null;
-        newWord.push(node.char);
       }
       if (node.isVisited || !node.isWordEnd) return null;
       node.isVisited = true;
-      return newWord.join("");
+      return node.word;
     }
 
     function getAdjacentWords(word) {
