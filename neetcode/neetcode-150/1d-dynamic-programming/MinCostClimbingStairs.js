@@ -4,9 +4,7 @@ class Solution {
    * @return {number}
    */
   minCostClimbingStairs(cost) {
-    if (cost.length === 0) return 0;
-    if (cost.length === 1) return 0;
-    if (cost.length === 2) return Math.min(cost[0], cost[1]);
+    if (cost.length < 2) return 0;
     let minCost1 = cost[0];
     let minCost2 = cost[1];
     for (let i = 2; i < cost.length; i++) {
