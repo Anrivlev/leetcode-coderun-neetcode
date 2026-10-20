@@ -72,3 +72,18 @@ console.log(
     ["JFK", "HOU"],
   ]),
 );
+
+console.log(
+  new Solution().findItinerary([
+    ["EZE", "AXA"],
+    ["TIA", "ANU"],
+    ["ANU", "JFK"],
+    ["JFK", "ANU"],
+    ["ANU", "EZE"],
+    ["TIA", "ANU"],
+    ["AXA", "TIA"],
+    ["TIA", "JFK"],
+    ["ANU", "TIA"],
+    ["JFK", "TIA"],
+  ]),
+);
