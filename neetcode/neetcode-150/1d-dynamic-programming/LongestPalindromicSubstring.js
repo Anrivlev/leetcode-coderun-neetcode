@@ -5,16 +5,16 @@ class Solution {
    */
   longestPalindrome(s) {
     // odd palindromes
-    const oddLengths = new Array(s.length).fill(0);
-    let oddMaxLength = 0;
+    let oddMaxRadius = 0;
     let oddMaxIndex = 0;
     for (let i = 0; i < s.length; i++) {
       let j = 1;
+      let radius = 0;
       while (i - j >= 0 && i + j < s.length) {
         if (s[i - j] !== s[i + j]) break;
-        oddLengths[i]++;
-        if (oddLengths[i] > oddMaxLength) {
-          oddMaxLength = oddLengths[i];
+        radius++;
+        if (radius > oddMaxRadius) {
+          oddMaxRadius = radius;
           oddMaxIndex = i;
         }
         j++;
@@ -22,28 +22,28 @@ class Solution {
     }
 
     // even palindromes
-    const evenLengths = new Array(s.length).fill(0);
-    let evenMaxLength = 0;
+    let evenMaxRadius = 0;
     let evenMaxIndex = 0;
     for (let i = 0; i < s.length; i++) {
       let j = 1;
+      let radius = 0;
       while (i - j + 1 >= 0 && i + j < s.length) {
         if (s[i - j + 1] !== s[i + j]) break;
-        evenLengths[i]++;
-        if (evenLengths[i] > evenMaxLength) {
-          evenMaxLength = evenLengths[i];
+        radius++;
+        if (radius > evenMaxRadius) {
+          evenMaxRadius = radius;
           evenMaxIndex = i;
         }
         j++;
       }
     }
 
-    if (oddMaxLength >= evenMaxLength) {
-      const startIndex = oddMaxIndex - oddMaxLength;
-      return s.slice(startIndex, startIndex + oddMaxLength * 2 + 1);
+    if (oddMaxRadius >= evenMaxRadius) {
+      const startIndex = oddMaxIndex - oddMaxRadius;
+      return s.slice(startIndex, startIndex + oddMaxRadius * 2 + 1);
     } else {
-      const startIndex = evenMaxIndex - evenMaxLength + 1;
-      return s.slice(startIndex, startIndex + evenMaxLength * 2);
+      const startIndex = evenMaxIndex - evenMaxRadius + 1;
+      return s.slice(startIndex, startIndex + evenMaxRadius * 2);
     }
   }
 }
