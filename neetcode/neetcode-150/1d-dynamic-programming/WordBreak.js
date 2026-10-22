@@ -5,6 +5,7 @@ class Solution {
    * @return {boolean}
    */
   wordBreak(s, wordDict) {
+    if (s.length === 0) return true;
     const root = {
       children: new Map(),
       char: null,
@@ -31,7 +32,6 @@ class Solution {
     const stack = [0];
     while (stack.length > 0) {
       const startIndex = stack.pop();
-      if (startIndex === s.length) return true;
       const words = [];
       let curr = root;
       let i = startIndex;
@@ -44,6 +44,7 @@ class Solution {
       }
       for (const word of words) {
         const nextIndex = startIndex + word.length;
+        if (nextIndex === s.length) return true;
         if (reached.has(nextIndex)) continue;
         reached.add(nextIndex);
         stack.push(nextIndex);
