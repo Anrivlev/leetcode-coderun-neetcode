@@ -1,5 +1,6 @@
 class Solution {
   /**
+   * Это кривое решение с ужасной асимптотикой 2**n
    * @param {number[]} nums
    * @return {boolean}
    */
