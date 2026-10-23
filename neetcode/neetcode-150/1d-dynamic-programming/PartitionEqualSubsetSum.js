@@ -8,17 +8,26 @@ class Solution {
     const sum = nums.reduce((prev, curr) => prev + curr, 0);
     if (sum % 2 !== 0) return false;
     const halfSum = sum / 2;
-    nums.sort((a, b) => a - b);
+    nums.sort((a, b) => b - a);
 
-    const stack = [{ sum: 0, index: 0 }];
-    while (stack.length > 0) {
-      const curr = stack.pop();
-      for (let i = curr.index; i < nums.length; i++) {
-        const sum = curr.sum + nums[i];
-        if (sum > halfSum) break;
-        if (sum === halfSum) return true;
-        stack.push({ sum, index: i + 1 });
+    let currSum = 0;
+    const backtrack = (i) => {
+      const num = nums[i];
+      if (currSum + num > halfSum) return false;
+      currSum += num;
+      if (currSum === halfSum) return true;
+
+      for (let j = i + 1; j < nums.length; j++) {
+        if (backtrack(j)) return true;
       }
+
+      currSum -= num;
+
+      return false;
+    };
+
+    for (let i = 0; i < nums.length; i++) {
+      if (backtrack(i)) return true;
     }
     return false;
   }
