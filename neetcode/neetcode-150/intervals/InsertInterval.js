@@ -24,6 +24,7 @@ class Solution {
       }
       if (intervals[i][0] > newInterval[1]) {
         if (!isInserted) intervals.splice(i, 0, newInterval);
+        if (deleteCount) intervals.splice(startIndex + 1, deleteCount);
         return intervals;
       }
       if (startIndex === -1) {
