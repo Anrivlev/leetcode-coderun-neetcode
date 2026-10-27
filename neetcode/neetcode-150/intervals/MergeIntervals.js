@@ -7,17 +7,15 @@ class Solution {
     const sortedIntervals = intervals.toSorted((a, b) => a[0] - b[0]);
     const mergedIntervals = [];
     let curr = null;
-    let i = 0;
-    while (i < sortedIntervals.length) {
+    for (const interval of sortedIntervals) {
       if (!curr) {
-        curr = sortedIntervals[i];
-      } else if (!this.isIntersected(curr, sortedIntervals[i])) {
+        curr = interval;
+      } else if (!this.isIntersected(curr, interval)) {
         mergedIntervals.push(curr);
-        curr = sortedIntervals[i];
+        curr = interval;
       } else {
-        curr[1] = Math.max(curr[1], sortedIntervals[i][1]);
+        curr[1] = Math.max(curr[1], interval[1]);
       }
-      i++;
     }
     if (curr) mergedIntervals.push(curr);
     return mergedIntervals;
