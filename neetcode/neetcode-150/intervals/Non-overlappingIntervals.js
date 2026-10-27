@@ -4,7 +4,7 @@ class Solution {
    * @return {number}
    */
   eraseOverlapIntervals(intervals) {
-    intervals.sort((a, b) => a[0] - b[0]);
+    intervals.sort((a, b) => a[1] - b[1]);
     let intervalsToEraseCount = 0;
     let currRightBorder = -Infinity;
     for (const interval of intervals) {
@@ -13,7 +13,6 @@ class Solution {
         continue;
       }
       intervalsToEraseCount++;
-      currRightBorder = Math.min(currRightBorder, interval[1]);
     }
     return intervalsToEraseCount;
   }
