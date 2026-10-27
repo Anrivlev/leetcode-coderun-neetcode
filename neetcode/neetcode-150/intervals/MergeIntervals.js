@@ -4,20 +4,21 @@ class Solution {
    * @return {number[][]}
    */
   merge(intervals) {
-    const sortedIntervals = intervals.toSorted((a, b) => a[0] - b[0]);
+    const sortedIntervals = intervals.sort((a, b) => a[0] - b[0]);
     const mergedIntervals = [];
-    let curr = null;
     for (const interval of sortedIntervals) {
-      if (!curr) {
-        curr = interval;
-      } else if (!this.isIntersected(curr, interval)) {
-        mergedIntervals.push(curr);
-        curr = interval;
+      if (
+        mergedIntervals.length === 0 ||
+        !this.isIntersected(mergedIntervals.at(-1), interval)
+      ) {
+        mergedIntervals.push(interval);
       } else {
-        curr[1] = Math.max(curr[1], interval[1]);
+        mergedIntervals.at(-1)[1] = Math.max(
+          mergedIntervals.at(-1)[1],
+          interval[1],
+        );
       }
     }
-    if (curr) mergedIntervals.push(curr);
     return mergedIntervals;
   }
 
