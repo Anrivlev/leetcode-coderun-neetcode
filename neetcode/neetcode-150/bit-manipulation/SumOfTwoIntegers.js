@@ -16,7 +16,7 @@ class Solution {
       if (sumBit) sum |= 1 << i;
     }
 
-    if (sum > 0x7fffffff) sum = ~(sum ^ 0xffffffff);
+    // if (sum > 0x7fffffff) sum = ~(sum ^ 0xffffffff);
 
     return sum;
   }

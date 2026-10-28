@@ -23,6 +23,10 @@ class Solution {
   reverse(x) {
     const MIN = -(2 ** 31);
     const MAX = 2 ** 31 - 1;
+    const maxPrefix = Math.trunc(MAX / 10);
+    const minPrefix = Math.trunc(MIN / 10);
+    const maxSuffix = MAX % 10;
+    const minSuffix = MIN % 10;
 
     let reversedX = 0;
 
@@ -30,9 +34,15 @@ class Solution {
       const digit = x % 10;
       x = Math.trunc(x / 10);
 
-      if (reversedX > MAX / 10 || (reversedX === MAX / 10 && digit > MAX % 10))
+      if (
+        reversedX > maxPrefix ||
+        (reversedX === maxPrefix / 10 && digit > maxSuffix)
+      )
         return 0;
-      if (reversedX < MIN / 10 || (reversedX === MIN / 10 && digit < MIN % 10))
+      if (
+        reversedX < minPrefix ||
+        (reversedX === minPrefix && digit < minSuffix)
+      )
         return 0;
 
       reversedX = reversedX * 10 + digit;
