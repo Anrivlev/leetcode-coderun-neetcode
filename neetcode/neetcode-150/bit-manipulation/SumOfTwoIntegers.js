@@ -8,6 +8,7 @@ class Solution {
     let carry = 0;
     let sum = 0;
     for (let i = 0; i < 32; i++) {
+      // А как от i++ избавиться? ахахахах Очень душная задача. Особенно с отрицательными числами.
       const aBit = (a >> i) & 1;
       const bBit = (b >> i) & 1;
       let sumBit = aBit ^ bBit ^ carry;
