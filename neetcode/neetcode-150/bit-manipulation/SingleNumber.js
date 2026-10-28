@@ -6,7 +6,7 @@ class Solution {
   singleNumber(nums) {
     let xor = 0;
     for (const num of nums) {
-      xor = xor ^ num;
+      xor ^= num;
     }
     return xor;
   }
