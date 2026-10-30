@@ -10,24 +10,27 @@ class Solution {
     const n = matrix[0].length;
     if (n === 0) return;
 
+    const rows = new Array(m).fill(false);
+    const columns = new Array(n).fill(false);
+
     for (let i = 0; i < m; i++) {
       for (let j = 0; j < n; j++) {
         if (matrix[i][j] !== 0) continue;
-        matrix[0][j] = 0;
-        matrix[i][0] = 0;
+        rows[i] = true;
+        columns[j] = true;
       }
     }
 
     for (let i = 0; i < m; i++) {
-      if (matrix[i][0] !== 0) continue;
-      for (let j = 1; j < n; j++) {
+      if (!rows[i]) continue;
+      for (let j = 0; j < n; j++) {
         matrix[i][j] = 0;
       }
     }
 
     for (let j = 0; j < n; j++) {
-      if (matrix[0][j] !== 0) continue;
-      for (let i = 1; i < m; i++) {
+      if (!columns[j]) continue;
+      for (let i = 0; i < m; i++) {
         matrix[i][j] = 0;
       }
     }
