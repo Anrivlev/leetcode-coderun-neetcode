@@ -36,7 +36,7 @@ class Solution {
 
       if (
         reversedX > maxPrefix ||
-        (reversedX === maxPrefix / 10 && digit > maxSuffix)
+        (reversedX === maxPrefix && digit > maxSuffix)
       )
         return 0;
       if (
