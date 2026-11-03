@@ -29,14 +29,14 @@ class Solution {
    */
   multiply(num1, num2) {
     let product = BigInt(0);
-    const baseDegree = BigInt(num1.length + num2.length - 2);
     for (let i = num1.length - 1; i >= 0; i--) {
       const digit1 = BigInt(num1[i]);
-      let degree = baseDegree - BigInt(i);
       for (let j = num2.length - 1; j >= 0; j--) {
         const digit2 = BigInt(num2[j]);
-        product += digit1 * digit2 * BigInt(10) ** degree;
-        degree = degree - BigInt(1);
+        product +=
+          digit1 *
+          digit2 *
+          BigInt(10) ** BigInt(num1.length + num2.length - 2 - i - j);
       }
     }
 
