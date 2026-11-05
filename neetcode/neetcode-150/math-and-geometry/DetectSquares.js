@@ -34,11 +34,20 @@ class CountSquares {
       for (const p2x of [p2x1, p2x2]) {
         const p2xPoints = this.pointIndex.get(p2x);
         if (!p2xPoints) continue;
-        const p2PointCount = p2xPoints.get(p1y);
-        const p3PointCount = p2xPoints.get(point[0]);
+        const p2PointCount = p2xPoints.get(p1y) ?? 0;
+        const p3PointCount = p2xPoints.get(point[1]) ?? 0;
         total += p1yCount * p2PointCount * p3PointCount;
       }
     }
     return total;
   }
 }
+
+const countSquares = new CountSquares();
+countSquares.add([3, 10]);
+countSquares.add([11, 2]);
+countSquares.add([3, 2]);
+console.log(countSquares.count([11, 10]));
+console.log(countSquares.count([14, 8]));
+countSquares.add([11, 2]);
+console.log(countSquares.count([11, 10]));
