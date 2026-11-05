@@ -9,13 +9,13 @@ class CountSquares {
    * @return {void}
    */
   add(point) {
-    let sameX = this.pointIndex.get(point[0]);
-    if (!sameX) {
-      sameX = new Map();
-      this.pointIndex.set(point[0], sameX);
+    let sameXPoints = this.pointIndex.get(point[0]);
+    if (!sameXPoints) {
+      sameXPoints = new Map();
+      this.pointIndex.set(point[0], sameXPoints);
     }
-    const countSameXSameY = sameX.get(point[1]) ?? 0;
-    sameX.set(point[1], countSameXSameY + 1);
+    const countSameXSameY = sameXPoints.get(point[1]) ?? 0;
+    sameXPoints.set(point[1], countSameXSameY + 1);
   }
 
   /**
@@ -23,10 +23,10 @@ class CountSquares {
    * @return {number}
    */
   count(point) {
-    const sameX = this.pointIndex.get(point[0]);
-    if (!sameX) return 0;
+    const sameXPoints = this.pointIndex.get(point[0]);
+    if (!sameXPoints) return 0;
     let total = 0;
-    for (const [p1y, p1yCount] of sameX.entries()) {
+    for (const [p1y, p1Count] of sameXPoints.entries()) {
       if (p1y === point[1]) continue;
       const sideLength = p1y - point[1];
       const p2x1 = point[0] - sideLength;
@@ -34,9 +34,9 @@ class CountSquares {
       for (const p2x of [p2x1, p2x2]) {
         const p2xPoints = this.pointIndex.get(p2x);
         if (!p2xPoints) continue;
-        const p2PointCount = p2xPoints.get(p1y) ?? 0;
-        const p3PointCount = p2xPoints.get(point[1]) ?? 0;
-        total += p1yCount * p2PointCount * p3PointCount;
+        const p2Count = p2xPoints.get(p1y) ?? 0;
+        const p3Count = p2xPoints.get(point[1]) ?? 0;
+        total += p1Count * p2Count * p3Count;
       }
     }
     return total;
