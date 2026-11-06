@@ -10,7 +10,6 @@ class Solution {
       maxIndex = Math.max(maxIndex, i + nums[i]);
       i++;
     }
-    console.log(maxIndex, nums.length);
     return maxIndex >= nums.length - 1;
   }
 }
