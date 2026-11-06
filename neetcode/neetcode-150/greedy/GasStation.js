@@ -18,7 +18,7 @@ class Solution {
       if (gasCount < 0) {
         if (isSecondCircle) return -1;
         startIndex = i + 1;
-        if (startIndex === 0) return -1;
+        if (startIndex === gas.length) return -1;
         gasCount = 0;
       }
       i++;
