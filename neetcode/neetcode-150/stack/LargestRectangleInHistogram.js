@@ -4,8 +4,6 @@ class Solution {
    * @return {number}
    */
   largestRectangleArea(heights) {
-    let maxArea = 0;
-
     const left = Array.from(
       { length: heights.length },
       (value, index) => index,
