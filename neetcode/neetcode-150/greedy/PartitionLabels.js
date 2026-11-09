@@ -7,20 +7,18 @@ class Solution {
     const charPositions = new Map();
     for (let i = 0; i < S.length; i++) {
       const char = S[i];
-      let charInfo = charPositions.get(char);
-      if (!charInfo) {
-        charInfo = { first: i, last: i };
-        charPositions.set(char, charInfo);
+      let charInterval = charPositions.get(char);
+      if (!charInterval) {
+        charInterval = [i, i];
+        charPositions.set(char, charInterval);
       }
-      charInfo.last = i;
+      charInterval[1] = i;
     }
     // Нет, эта информация не помогает.
     // Нет, помогает. Теперь у меня есть интервалы. Нужно выполнить объединение и вернуть множество результатов.
     // Это задача на merge intervals, уже решал.
 
-    const intervals = Array.from(charPositions.values()).map(
-      ({ first, last }) => [first, last],
-    );
+    const intervals = Array.from(charPositions.values());
     intervals.sort((a, b) => a[0] - b[0]);
 
     const mergedIntervals = [];
