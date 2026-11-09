@@ -15,11 +15,29 @@ class Solution {
       charInfo.last = i;
     }
     // Нет, эта информация не помогает.
-    // Нет, помогает. Теперь у меня есть интервалы. Нужно выполнить объединение и вернуть множество результатов..
+    // Нет, помогает. Теперь у меня есть интервалы. Нужно выполнить объединение и вернуть множество результатов.
     // Это задача на merge intervals, уже решал.
 
-    const answer = [];
+    const intervals = Array.from(charPositions.values()).map(
+      ({ first, last }) => [first, last],
+    );
+    intervals.sort((a, b) => a[0] - b[0]);
 
-    return answer;
+    const mergedIntervals = [];
+    for (const interval of intervals) {
+      if (
+        mergedIntervals.length === 0 ||
+        mergedIntervals.at(-1)[1] < interval[0]
+      ) {
+        mergedIntervals.push(interval);
+      } else {
+        mergedIntervals.at(-1)[1] = Math.max(
+          interval[1],
+          mergedIntervals.at(-1)[1],
+        );
+      }
+    }
+
+    return mergedIntervals.map((interval) => interval[1] - interval[0] + 1);
   }
 }
