@@ -4,22 +4,19 @@ class Solution {
    * @return {number}
    */
   maxProfit(prices) {
-    // Общая идея верна, реализация не до конца правильная. Когда вернусь к теме, решу заново.
-    // let maxProfitIfSoldYesterday = 0;
-    // let maxProfitIfNot = 0;
-    // let buyPriceIfSoldYesterday = prices[0];
-    // let buyPriceIfNot = prices[0];
-    // for (let i = 1; i < prices.length; i++) {
-    //   const price = prices[i];
-    //   if (price > buyPrice) {
-    //     maxProfitIfSoldYesterday = maxProfitIfNot + price - buyPrice;
-    //     maxProfitIfNot = Math.max(maxProfitIfNot, maxProfitIfSoldYesterday);
-    //     buyPrice = price;
-    //   } else {
-    //     buyPriceIfNot = price;
-    //     buyPriceIfSoldYesterday = price;
-    //   }
-    // }
-    // return Math.max(maxProfitIfNot, maxProfitIfSoldYesterday);
+    const n = prices.length;
+    const dp = Array.from({ length: n + 1 }, () => [0, 0]);
+
+    for (let i = n - 1; i >= 0; i--) {
+      const buy = dp[i + 1][0] - prices[i];
+      const cooldown = dp[i + 1][1];
+      dp[i][1] = Math.max(buy, cooldown);
+
+      const sell = i + 2 < n ? dp[i + 2][1] + prices[i] : prices[i];
+      const cooldownSell = dp[i + 1][0];
+      dp[i][0] = Math.max(sell, cooldownSell);
+    }
+
+    return dp[0][1];
   }
 }
