@@ -6,9 +6,9 @@ class Solution {
    */
   change(amount, coins) {
     const row = new Array(amount + 1).fill(0);
+    row[0] = 1;
     for (let i = 0; i < coins.length; i++) {
       const coin = coins[i];
-      row[0] = 1;
       for (let j = 1; j <= amount; j++) {
         row[j] += row[j - coin] ?? 0;
       }
