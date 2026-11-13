@@ -5,23 +5,20 @@ class Solution {
    * @return {number}
    */
   findTargetSumWays(nums, target) {
-    // const totalSum = nums.reduce((acc, curr) => acc + curr, 0);
-    // if (totalSum === target) return 1;
-    // if (totalSum < target) return 0;
-
-    const dp = Array.from({ length: nums.length + 1 }, () => new Map());
-
-    dp[0].set(0, 1);
+    let prevMap = new Map();
+    prevMap.set(0, 1);
+    let currMap;
 
     for (let i = 0; i < nums.length; i++) {
       const num = nums[i];
-      const sums = Array.from(dp[i].entries());
-      for (const [sum, count] of sums) {
-        dp[i + 1].set(sum + num, (dp[i + 1].get(sum + num) ?? 0) + count);
-        dp[i + 1].set(sum - num, (dp[i + 1].get(sum - num) ?? 0) + count);
+      currMap = new Map();
+      for (const [sum, count] of prevMap.entries()) {
+        currMap.set(sum + num, (currMap.get(sum + num) ?? 0) + count);
+        currMap.set(sum - num, (currMap.get(sum - num) ?? 0) + count);
       }
+      prevMap = currMap;
     }
 
-    return dp[nums.length].get(target) ?? 0;
+    return prevMap.get(target) ?? 0;
   }
 }
